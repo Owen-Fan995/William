@@ -1,4 +1,4 @@
-name: Deploy Project
+name: Events Activities and Filters
 on:
   pull_request:
     types:
@@ -13,25 +13,10 @@ on:
       - main # main
       - 'jr16-*' # * wildcards except /
       - 'feat/**' # ** wildcards, allowing /
-    #paths-ignore:
-      
-      #- '.github/workflows/*'
+    paths-ignore:
+      - '.github/workflows/*'
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v4
-      - name: Install NodeJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: Install dependencies
-        run: npm ci
-      - name: Run tests
-        run: npm test
   deploy:
-    #needs: test # will be parallel if no needs
     runs-on: ubuntu-latest
     steps:
       - name: Get code
