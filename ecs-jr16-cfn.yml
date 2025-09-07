@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  ECSCluster:
+    Type: 'AWS::ECS::Cluster'
+    Properties:
+      ClusterName: JR16Cluster
+  ECSTaskDefinition:
+    Type: 'AWS::ECS::TaskDefinition'
+    Properties:
+      ContainerDefinitions:
+        - Essential: true
+          Image: hfan3619/sample-docker:latest
+          Name: gha-next
+          PortMappings:
+            - ContainerPort: 3000
+              HostPort: 3000
+              Protocol: tcp
+      Cpu: 256
+      ExecutionRoleArn: 'arn:aws:iam::982081070367:role/ecsTaskExecutionRole'
+      Family: task-definition-jr16
+      Memory: 512
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      RuntimePlatform:
+        OperatingSystemFamily: LINUX
+  ECSService:
+    Type: 'AWS::ECS::Service'
+    Properties:
+      ServiceName: jr16-service
+      Cluster: !Ref ECSCluster
+      DesiredCount: 1
+      LaunchType: FARGATE
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: ENABLED
+          SecurityGroups:
+            - sg-01379ead391ea45b7
+          Subnets:
+            - subnet-087d4d9e6233e698f
+      TaskDefinition: !Ref ECSTaskDefinition
