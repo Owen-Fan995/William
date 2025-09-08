@@ -17,7 +17,7 @@ jobs:
     needs: test
     name: Deploy
     runs-on: ubuntu-latest
-    environment: uat
+    environment: production
 
     steps:
     - name: Checkout
@@ -33,5 +33,4 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
-
-    ...
+     ...
