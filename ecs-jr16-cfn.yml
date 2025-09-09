@@ -9,7 +9,7 @@ Resources:
     Properties:
       ContainerDefinitions:
         - Essential: true
-          Image: hfan3619/sample-docker:latest
+          Image: hfan3619/sample-dock。。。。er:latest
           Name: gha-next
           PortMappings:
             - ContainerPort: 3000
