@@ -9,7 +9,7 @@ Resources:
     Properties:
       ContainerDefinitions:
         - Essential: true
-          Image: willido/sample-app:gha
+          Image: hfan3619/sample-docker:latest
           Name: gha-next
           PortMappings:
             - ContainerPort: 3000
