@@ -9,7 +9,7 @@ env:
   ECR_REPOSITORY: gha-next           # set this to your Amazon ECR repository name
   ECS_SERVICE: jr16-service                 # set this to your Amazon ECS service name
   ECS_CLUSTER: JR16Cluster                 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: ./task-definition.json # set this to the path to your Amazon ECS task definition
+  ECS_TASK_DEFINITION: ./task.definition.json # set this to the path to your Amazon ECS task definition
                                               # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: gha-next           
 
@@ -51,6 +51,9 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
+    - name: Mask docker password
+      run: echo "::add-mask::${DOCKER_PASSWORD}"
+
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
