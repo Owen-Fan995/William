@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Nextjs Demo",
+  title: "Owen won lotto 1 billion",
 };
 
 export default function Page() {
